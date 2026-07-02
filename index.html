@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <meta name="description" content="A professional, premium image gallery showcasing breathtaking photography.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="dark" data-color-theme="blue">
+
+    <!-- Aurora Animated Background -->
+    <div class="aurora-bg"></div>
+
+    <!-- Loading Screen -->
+    <div id="loader-wrapper">
+        <div class="loader"></div>
+        <div class="loader-text">Loading Gallery...</div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         PROFESSIONAL HEADER (60–70px height)
+    ══════════════════════════════════════════ -->
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+
+            <!-- LEFT: Logo -->
+            <a href="#" class="header-logo" id="home-btn" title="Go to Home">
+                <div class="logo-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-sub">Image Gallery</span>
+                </div>
+            </a>
+
+            <!-- CENTER: Search Bar -->
+            <div class="header-search" id="header-search-wrap">
+                <div class="search-box" id="search-box">
+                    <svg class="search-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="search-input" placeholder="Search images..." autocomplete="off" aria-label="Search images">
+                    <button class="search-clear hidden" id="search-clear" title="Clear search" aria-label="Clear search">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                    <button id="voice-search-btn" class="voice-btn" title="Voice Search" aria-label="Voice Search">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                    </button>
+                </div>
+                <!-- Search Suggestions Dropdown -->
+                <div class="search-suggestions hidden" id="search-suggestions"></div>
+            </div>
+
+            <!-- RIGHT: Navigation Items -->
+            <nav class="header-nav" id="header-nav">
+                <!-- Home -->
+                <button class="nav-item active" id="nav-home" title="Home">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span>Home</span>
+                </button>
+
+                <!-- Favorites -->
+                <button class="nav-item" id="nav-favorites" title="Favorites">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <span>Favorites</span>
+                </button>
+
+                <!-- Premium -->
+                <button class="nav-item premium-btn" id="nav-premium" title="Go Premium">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h20L12 4 2 20z"/></svg>
+                    <span>Premium</span>
+                </button>
+
+                <!-- Dark mode -->
+                <button class="nav-item icon-only" id="dark-mode-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    <svg class="icon-sun hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+                </button>
+
+                <!-- Color Theme Switcher -->
+                <div class="theme-dots">
+                    <button class="theme-btn blue active" data-color="blue" title="Blue"></button>
+                    <button class="theme-btn purple" data-color="purple" title="Purple"></button>
+                    <button class="theme-btn green" data-color="green" title="Green"></button>
+                    <button class="theme-btn orange" data-color="orange" title="Orange"></button>
+                </div>
+
+                <!-- Login -->
+                <button class="nav-item login-btn" id="nav-login" title="Login">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span>Login</span>
+                </button>
+            </nav>
+
+            <!-- Hamburger (mobile) -->
+            <button class="hamburger" id="hamburger" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Slide-out Menu -->
+    <div class="mobile-menu-overlay hidden" id="mobile-overlay"></div>
+    <div class="mobile-menu hidden" id="mobile-menu">
+        <button class="mobile-close" id="mobile-close" aria-label="Close menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <a href="#" class="header-logo mobile-logo">
+            <div class="logo-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <div class="logo-text"><span class="logo-name">Responsive</span><span class="logo-sub">Image Gallery</span></div>
+        </a>
+        <nav class="mobile-nav">
+            <button class="mobile-nav-item" data-action="home">🏠 Home</button>
+            <button class="mobile-nav-item" data-action="favorites">❤️ Favorites</button>
+            <button class="mobile-nav-item premium" data-action="premium">👑 Premium</button>
+            <button class="mobile-nav-item" data-action="login">👤 Login</button>
+            <button class="mobile-nav-item" data-action="theme">🌙 Toggle Theme</button>
+        </nav>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         LOGIN MODAL
+    ══════════════════════════════════════════ -->
+    <div class="modal-overlay hidden" id="login-overlay">
+        <div class="modal login-modal" role="dialog" aria-modal="true" aria-label="Login">
+            <button class="modal-close" id="login-close" aria-label="Close">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div class="modal-header">
+                <div class="modal-logo">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <h2>Welcome Back</h2>
+                <p>Sign in to access your gallery</p>
+            </div>
+            <form class="modal-form" id="login-form" novalidate>
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <div class="input-wrap">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <div class="input-wrap">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <input type="password" id="login-password" placeholder="Your password" autocomplete="current-password">
+                        <button type="button" class="pwd-toggle" id="pwd-toggle" aria-label="Show password">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember-me"> Remember me
+                    </label>
+                    <a href="#" class="link-sm">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn-primary full-width">Login</button>
+                <p class="form-footer">Don't have an account? <a href="#" class="link-accent">Sign Up</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         PREMIUM MODAL
+    ══════════════════════════════════════════ -->
+    <div class="modal-overlay hidden" id="premium-overlay">
+        <div class="modal premium-modal" role="dialog" aria-modal="true" aria-label="Go Premium">
+            <button class="modal-close" id="premium-close" aria-label="Close">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div class="premium-header">
+                <div class="crown-icon">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h20L12 4 2 20z"/></svg>
+                </div>
+                <h2>Unlock Premium</h2>
+                <p>Get the full Gallery Pro experience</p>
+            </div>
+            <div class="premium-features">
+                <div class="feature-item"><span class="feat-icon">⬇️</span><div><strong>Unlimited Downloads</strong><small>Download any photo in any resolution</small></div></div>
+                <div class="feature-item"><span class="feat-icon">🚫</span><div><strong>Zero Ads</strong><small>Completely clean, distraction-free browsing</small></div></div>
+                <div class="feature-item"><span class="feat-icon">🖼️</span><div><strong>4K & RAW Images</strong><small>Full resolution master files</small></div></div>
+                <div class="feature-item"><span class="feat-icon">🗂️</span><div><strong>Exclusive Collections</strong><small>Access member-only curated albums</small></div></div>
+                <div class="feature-item"><span class="feat-icon">⚡</span><div><strong>Priority Loading</strong><small>Blazing fast CDN delivery</small></div></div>
+                <div class="feature-item"><span class="feat-icon">🎧</span><div><strong>Priority Support</strong><small>24/7 dedicated premium support</small></div></div>
+            </div>
+            <div class="premium-price">
+                <span class="price">$4.99</span><span class="per">/month</span>
+            </div>
+            <div class="premium-actions">
+                <button class="btn-primary full-width upgrade-btn" id="upgrade-btn">👑 Upgrade Now</button>
+                <button class="btn-ghost" id="maybe-later">Maybe Later</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Discover Extraordinary Imagery</h2>
+            <p>A curated collection of hand-picked, high-resolution masterpieces.</p>
+        </div>
+    </section>
+
+    <!-- Collections Slider -->
+    <section class="collections container">
+        <h3 class="section-title">Explore Collections</h3>
+        <div class="collections-slider" id="collections-slider"></div>
+    </section>
+
+    <!-- Toolbar -->
+    <div class="toolbar container">
+        <div class="filters" id="category-filters">
+            <button class="filter-btn active" data-category="all">All Photos</button>
+            <button class="filter-btn" data-category="nature">Nature</button>
+            <button class="filter-btn" data-category="city">City</button>
+            <button class="filter-btn" data-category="animals">Animals</button>
+            <button class="filter-btn" data-category="technology">Technology</button>
+            <button class="filter-btn" data-category="favorites">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--primary-color)" stroke="var(--primary-color)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                Favorites
+            </button>
+        </div>
+        <div class="utility-actions">
+            <button id="shuffle-btn" class="utility-btn" title="Shuffle Gallery">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+                Shuffle
+            </button>
+            <button id="compare-mode-btn" class="utility-btn outline">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                Compare
+            </button>
+        </div>
+    </div>
+
+    <!-- No results message -->
+    <div class="no-results hidden" id="no-results">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <h3>No images found</h3>
+        <p>Try a different search term or category.</p>
+        <button class="btn-primary" id="clear-search-btn">Clear Search</button>
+    </div>
+
+    <!-- Compare Dock -->
+    <div id="compare-dock" class="hidden blur-glass">
+        <span>Select 2 images to compare</span>
+        <button id="execute-compare" disabled>Compare</button>
+        <button id="cancel-compare">Cancel</button>
+    </div>
+
+    <!-- Gallery -->
+    <main class="container gallery-wrapper">
+        <section class="gallery grid-editorial" id="gallery"></section>
+        <div id="loading-sentinel" class="gallery grid-editorial">
+            <div class="skeleton-card spotlight"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section about">
+                <a href="#" class="header-logo">
+                    <div class="logo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                    <div class="logo-text"><span class="logo-name">Responsive</span><span class="logo-sub">Image Gallery</span></div>
+                </a>
+                <p>Establishing the global standard for high-end aesthetic image galleries.</p>
+            </div>
+            <div class="footer-section links">
+                <h3>Company</h3>
+                <ul><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Press Kits</a></li></ul>
+            </div>
+            <div class="footer-section contact">
+                <h3>Connect</h3>
+                <p>contact@gallerypro.com</p>
+                <div class="socials">
+                    <a href="#" title="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                    <a href="#" title="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+                    <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 Responsive Image Gallery. All Rights Reserved.</p></div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox blur-glass" role="dialog" aria-modal="true" aria-label="Image Viewer">
+        <div class="lightbox-toolbar">
+            <div class="lightbox-counter" id="lightbox-counter">1 / 80</div>
+            <div class="lightbox-tools">
+                <button id="lb-favorite" title="Favorite"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+                <button id="lb-play" title="Slideshow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></button>
+                <div class="download-dropdown-wrapper">
+                    <button id="lb-download-toggle" title="Download"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+                    <div class="download-menu blur-glass hidden" id="download-menu">
+                        <a href="#" id="dl-small" download>Small (640×480)</a>
+                        <a href="#" id="dl-med" download>Medium (1920×1080)</a>
+                        <a href="#" id="dl-orig" class="highlight" download>Original 4K</a>
+                    </div>
+                </div>
+                <button id="lb-fullscreen" title="Fullscreen"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
+                <button id="lb-info-toggle" title="EXIF Info"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></button>
+                <button id="lb-close" title="Close"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            </div>
+        </div>
+        <button class="lightbox-nav lb-prev"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button class="lightbox-nav lb-next"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+        <div class="lightbox-content-wrapper" id="lb-wrapper">
+            <img class="lightbox-content" id="lightbox-img" src="" alt="Fullscreen View">
+        </div>
+        <div id="lightbox-info-panel" class="info-panel blur-glass">
+            <h3 id="panel-title">Image Title</h3>
+            <p id="panel-author" class="author-tag">@Photographer</p>
+            <div class="exif-grid">
+                <div class="exif-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg><div><span>Aperture</span><span id="exif-aperture">f/1.8</span></div></div>
+                <div class="exif-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><div><span>Shutter</span><span id="exif-shutter">1/250s</span></div></div>
+                <div class="exif-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg><div><span>ISO</span><span id="exif-iso">100</span></div></div>
+                <div class="exif-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><div><span>Resolution</span><span id="panel-res">4K</span></div></div>
+                <div class="exif-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><div><span>Location</span><span id="panel-loc">—</span></div></div>
+                <div class="exif-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><div><span>Date</span><span id="panel-date">—</span></div></div>
+            </div>
+            <div class="rating-box">
+                <p>Rate this Photo</p>
+                <div class="stars" id="lb-rating">
+                    <span data-val="1"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                    <span data-val="2"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                    <span data-val="3"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                    <span data-val="4"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                    <span data-val="5"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compare Modal -->
+    <div id="compare-modal" class="lightbox blur-glass hidden">
+        <div class="lightbox-toolbar">
+            <h2>Compare Visuals</h2>
+            <button class="icon-only" id="close-compare-modal"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        </div>
+        <div class="compare-container container">
+            <div class="compare-slot"><img id="compare-img-1" src="" alt=""><h3 id="compare-title-1"></h3></div>
+            <div class="compare-slot"><img id="compare-img-2" src="" alt=""><h3 id="compare-title-2"></h3></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
